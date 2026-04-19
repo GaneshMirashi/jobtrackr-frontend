@@ -10,5 +10,9 @@ export default function Home() {
       .catch(err => console.error(err));
   }, []);
 
-  return <div>Check console</div>;
+  return (
+  <div className="bg-blue-500 text-white p-5">
+    Tailwind Working 🚀
+  </div>
+);
 }
