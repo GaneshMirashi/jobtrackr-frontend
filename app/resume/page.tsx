@@ -8,32 +8,64 @@ export default function ResumePage() {
   const { mutate, data, isPending } = useResumeAnalyzer();
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-4">
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
       <h1 className="text-2xl font-semibold">
         AI Resume Analyzer
       </h1>
 
       <textarea
-        placeholder="Paste your resume here..."
+        placeholder="Paste resume here..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="w-full border p-3 rounded h-40"
+      />
+
+      <input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          const formData = new FormData();
+          if (file) {
+            formData.append("file", file);
+            mutate(formData);
+          }
+        }}
       />
 
       <button
         onClick={() => mutate(text)}
         className="bg-brand-500 text-white px-4 py-2 rounded"
       >
-        Analyze Resume
+        Analyze
       </button>
 
       {isPending && <p>Analyzing...</p>}
 
       {data && (
-        <div className="bg-white p-4 rounded border whitespace-pre-wrap">
-          {data}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <Card title="Skills" items={data.skills} />
+          <Card title="Strengths" items={data.strengths} />
+          <Card title="Weaknesses" items={data.weaknesses} />
+          <Card title="Suggestions" items={data.suggestions} />
+
         </div>
       )}
+    </div>
+  );
+}
+
+function Card({ title, items }: any) {
+  if (!items) return null;
+
+  return (
+    <div className="bg-white p-4 rounded-xl border shadow-sm">
+      <h2 className="font-medium mb-2">{title}</h2>
+      <ul className="text-sm list-disc ml-4 space-y-1">
+        {items.map((item: string, i: number) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
