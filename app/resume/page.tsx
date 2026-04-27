@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useResumeAnalyzer } from "@/hooks/useResumeAnalyzer";
 
 export default function ResumePage() {
+  const { mutate, data, isPending, error } = useResumeAnalyzer();
   const [text, setText] = useState("");
-  const { mutate, data, isPending } = useResumeAnalyzer();
+  const [file, setFile] = useState<File | null>(null);
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
@@ -23,17 +24,24 @@ export default function ResumePage() {
       <input
         type="file"
         onChange={(e) => {
-          const file = e.target.files?.[0];
-          const formData = new FormData();
-          if (file) {
-            formData.append("file", file);
-            mutate(formData);
+          const selectedFile = e.target.files?.[0];
+          if (selectedFile) {
+            setFile(selectedFile);
           }
         }}
       />
+      {error && <p className="text-red-500">Something went wrong</p>}
 
       <button
-        onClick={() => mutate(text)}
+        onClick={() => {
+          if (file) {
+            const formData = new FormData();
+            formData.append("file", file);
+            mutate(formData);
+          } else {
+            mutate(text);
+          }
+        }}
         className="bg-brand-500 text-white px-4 py-2 rounded"
       >
         Analyze
