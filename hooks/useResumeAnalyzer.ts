@@ -8,10 +8,10 @@ export const useResumeAnalyzer = () => {
 
       if (payload instanceof FormData) {
         // File upload
-        res = await api.post("/applications/resume-analyze/", payload);
+        res = await api.post("/resume/resume-analyze/", payload);
       } else {
         // Text input
-        res = await api.post("/applications/resume-analyze/", {
+        res = await api.post("/resume/resume-analyze/", {
           text: payload,
         });
       }

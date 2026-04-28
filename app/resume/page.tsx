@@ -42,7 +42,7 @@ export default function ResumePage() {
             mutate(text);
           }
         }}
-        className="bg-brand-500 text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
       >
         Analyze
       </button>
