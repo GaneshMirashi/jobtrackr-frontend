@@ -9,6 +9,7 @@ type FormData = {
   job_title: string;
   status: string;
   applied_date: string;
+  follow_up_date: string;
 };
 
 export default function ApplicationForm() {
@@ -63,6 +64,12 @@ export default function ApplicationForm() {
         <input
           type="date"
           {...register("applied_date")}
+          className="w-full p-2 border border-surface-border rounded"
+        />
+
+        <input
+          type="date"
+          {...register("follow_up_date")}
           className="w-full p-2 border border-surface-border rounded"
         />
 
