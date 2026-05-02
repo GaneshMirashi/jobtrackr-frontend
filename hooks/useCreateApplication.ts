@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/lib/api";
+import { toast } from "react-hot-toast";
 
 export const useCreateApplication = () => {
   const queryClient = useQueryClient();
@@ -10,8 +11,12 @@ export const useCreateApplication = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      // Refresh applications list
+      toast.success("Application added 🚀");
       queryClient.invalidateQueries({ queryKey: ["applications"] });
+    },
+
+    onError: () => {
+      toast.error("Failed to add application ❌");
     },
   });
 };
