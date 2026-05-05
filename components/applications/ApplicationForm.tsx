@@ -28,7 +28,7 @@ export default function ApplicationForm() {
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl border border-surface-border shadow-sm">
+    <div className="bg-[#0b0f14] p-4 rounded-xl border border-surface-border shadow-sm">
       <h2 className="text-lg font-semibold mb-3">Add Application</h2>
 
       {success && (

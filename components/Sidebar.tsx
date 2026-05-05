@@ -18,7 +18,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="w-64 h-full bg-white border-r p-4 flex flex-col">
+    <div className="w-64 h-full bg-[#0b0f14] border-r p-4 flex flex-col mt-6">
       <h1 className="text-xl font-semibold mb-6">JobTrackr</h1>
 
       <div className="flex flex-col gap-2 flex-1">
@@ -29,7 +29,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
             <Link
               key={item.href}
               href={item.href}
-              onClick={onClose} // 👈 closes mobile drawer
+              onClick={onClose} 
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${
                 pathname === item.href
                   ? "bg-brand-500 text-white"

@@ -34,7 +34,7 @@ export default function ApplicationsPage() {
 
     return (
         // <ProtectedRoute>
-        <div className="p-6 bg-surface-page min-h-screen">
+        <div className="p-6 bg-[#0b0f14] min-h-screen">
             <h1 className="text-2xl font-semibold mb-4">Applications</h1>
 
             {/* ✅ ALWAYS SHOW FORM */}
@@ -78,7 +78,7 @@ export default function ApplicationsPage() {
             </div>
 
             {/* List */}
-            <div className="mt-6 bg-white rounded-xl border border-surface-border overflow-hidden">
+            <div className="mt-6 bg-[#0b0f14] rounded-xl border border-surface-border overflow-hidden">
                 <table className="w-full text-sm">
 
                     {/* HEADER */}

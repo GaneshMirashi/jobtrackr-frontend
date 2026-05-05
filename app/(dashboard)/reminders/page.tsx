@@ -8,7 +8,7 @@ export default function RemindersPage() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-[#0b0f14] rounded-xl">
       <h1 className="text-xl font-semibold mb-4">
         Upcoming Reminders
       </h1>

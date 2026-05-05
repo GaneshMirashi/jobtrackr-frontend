@@ -45,7 +45,7 @@ export default function KanbanPage() {
   };
 
   return (
-    <div className="p-6 overflow-x-auto">
+    <div className="p-6 overflow-x-auto bg-[#0b0f14] rounded-xl">
       <h1 className="text-2xl font-semibold mb-6">Kanban Board</h1>
 
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -57,7 +57,7 @@ export default function KanbanPage() {
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  className="w-64 bg-surface-muted p-3 rounded-xl"
+                  className="w-50 bg-surface-muted p-3 rounded-xl"
                 >
                   <h2 className="font-medium mb-3">{col}</h2>
 
@@ -72,7 +72,7 @@ export default function KanbanPage() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="bg-white p-3 rounded-lg mb-3 shadow-sm border border-surface-border"
+                          className="bg-[#1f2937] p-3 rounded-lg mb-3 shadow-sm border border-surface-border"
                         >
                           <h3 className="text-sm font-medium">
                             {app.company_name}

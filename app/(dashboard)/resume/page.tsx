@@ -9,7 +9,7 @@ export default function ResumePage() {
   const [file, setFile] = useState<File | null>(null);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6">
+    <div className="p-6 mx-auto space-y-6 bg-[#0b0f14] rounded-xl">
       <h1 className="text-2xl font-semibold">
         AI Resume Analyzer
       </h1>
@@ -67,7 +67,7 @@ function Card({ title, items }: any) {
   if (!items) return null;
 
   return (
-    <div className="bg-white p-4 rounded-xl border shadow-sm">
+    <div className="bg-[#0b0f14] p-4 rounded-xl border shadow-sm">
       <h2 className="font-medium mb-2">{title}</h2>
       <ul className="text-sm list-disc ml-4 space-y-1">
         {items.map((item: string, i: number) => (
