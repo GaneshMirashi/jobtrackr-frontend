@@ -17,6 +17,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function LoginPage() {
   const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,7 +34,8 @@ export default function LoginPage() {
       setLoading(true);
       setError("");
 
-      const res = await api.post("/auth/login/", data);
+      const res = await api.post("/login/", data);
+
       const { access, refresh } = res.data.data;
 
       const setTokens = useAuthStore.getState().setTokens;
@@ -48,44 +50,48 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-page flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-100 px-4">
       <div className="w-full max-w-md">
+        
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 border border-surface-border">
+        <div className="bg-white shadow-2xl rounded-3xl p-8 border border-gray-100">
           
           {/* Header */}
-          <div className="mb-6 text-center">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Welcome back 👋
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome Back 👋
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
-              Sign in to your account
+
+            <p className="text-gray-500 mt-2 text-sm">
+              Login to continue to your dashboard
             </p>
           </div>
 
           {/* Error */}
           {error && (
-            <div className="mb-4 bg-red-50 text-red-600 text-sm p-2 rounded">
+            <div className="mb-4 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
               {error}
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             
             {/* Email */}
             <div>
-              <label className="text-sm font-medium text-gray-700">
-                Email
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
               </label>
+
               <input
                 type="email"
                 {...register("email")}
                 placeholder="you@example.com"
-                className="mt-1 w-full px-3 py-2 border border-surface-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
               />
+
               {errors.email && (
-                <p className="text-red-500 text-xs mt-1">
+                <p className="mt-1 text-xs text-red-500">
                   {errors.email.message}
                 </p>
               )}
@@ -93,38 +99,50 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
+
               <input
                 type="password"
                 {...register("password")}
                 placeholder="••••••••"
-                className="mt-1 w-full px-3 py-2 border border-surface-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
               />
+
               {errors.password && (
-                <p className="text-red-500 text-xs mt-1">
+                <p className="mt-1 text-xs text-red-500">
                   {errors.password.message}
                 </p>
               )}
             </div>
 
-            {/* Button */}
+            {/* Forgot Password */}
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-500 hover:bg-brand-600 text-white py-2 rounded-lg transition duration-200"
+              className="w-full rounded-xl bg-blue-600 py-3 text-white font-medium transition hover:bg-blue-700 disabled:opacity-70"
             >
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
 
           {/* Footer */}
-          <p className="text-sm text-gray-500 text-center mt-4">
+          <p className="mt-6 text-center text-sm text-gray-500">
             Don’t have an account?{" "}
             <span
-              onClick={() => router.push("/auth/register")}
-              className="text-brand-500 cursor-pointer hover:underline"
+              onClick={() => router.push("/register")}
+              className="cursor-pointer font-medium text-blue-600 hover:underline"
             >
               Register
             </span>

@@ -36,7 +36,7 @@ export default function RegisterPage() {
       await api.post("/auth/register/", data);
 
       // After successful registration → go to login
-      router.push("/auth/login");
+      router.push("/login");
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed");
     } finally {
@@ -138,7 +138,7 @@ export default function RegisterPage() {
           <p className="text-sm text-gray-500 text-center mt-4">
             Already have an account?{" "}
             <span
-              onClick={() => router.push("/auth/login")}
+              onClick={() => router.push("/login")}
               className="text-brand-500 cursor-pointer hover:underline"
             >
               Login
