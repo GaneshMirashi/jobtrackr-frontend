@@ -34,7 +34,7 @@ export default function LoginPage() {
       setLoading(true);
       setError("");
 
-      const res = await api.post("/login/", data);
+      const res = await api.post("/auth/login/", data);
 
       const { access, refresh } = res.data.data;
 
