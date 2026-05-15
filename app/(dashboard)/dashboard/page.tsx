@@ -32,20 +32,20 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] p-6 space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 space-y-6">
 
       {/* 🔹 Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-white">Dashboard</h1>
+        <h1 className="text-2xl font-semibold">Dashboard</h1>
       </div>
 
       {/* 🔹 KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* Total */}
-        <div className="bg-[#0F172A] border border-[#1F2937] p-5 rounded-xl">
-          <p className="text-sm text-gray-400">Total Applications</p>
-          <h2 className="text-2xl font-bold text-white mt-1">
+        <div className="bg-white border border-gray-200 shadow-sm p-5 rounded-xl">
+          <p className="text-sm text-gray-500">Total Applications</p>
+          <h2 className="text-2xl font-bold text-gray-900 mt-1">
             {data.total}
           </h2>
         </div>
@@ -54,10 +54,10 @@ export default function DashboardPage() {
         {Object.entries(data.status_counts).map(([status, count]) => (
           <div
             key={status}
-            className="bg-[#0F172A] border border-[#1F2937] p-5 rounded-xl"
+            className="bg-white border border-gray-200 shadow-sm p-5 rounded-xl"
           >
-            <p className="text-sm text-gray-400 capitalize">{status}</p>
-            <h2 className="text-xl font-semibold text-white mt-1">
+            <p className="text-sm text-gray-500 capitalize">{status}</p>
+            <h2 className="text-xl font-semibold text-gray-900 mt-1">
               {count}
             </h2>
           </div>
@@ -68,8 +68,8 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* 📊 Chart */}
-        <div className="lg:col-span-2 bg-[#0F172A] border border-[#1F2937] p-5 rounded-xl">
-          <h2 className="text-lg font-medium text-white mb-4">
+        <div className="lg:col-span-2 bg-white border border-gray-200 shadow-sm p-5 rounded-xl">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
             Applications by Status
           </h2>
 
@@ -96,8 +96,8 @@ export default function DashboardPage() {
         </div>
 
         {/* 🕒 Recent Applications */}
-        <div className="bg-[#0F172A] border border-[#1F2937] p-5 rounded-xl">
-          <h2 className="text-lg font-medium text-white mb-4">
+        <div className="bg-white border border-gray-200 shadow-sm p-5 rounded-xl">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
             Recent Applications
           </h2>
 
@@ -105,13 +105,13 @@ export default function DashboardPage() {
             {data.recent_applications.map((app: any) => (
               <div
                 key={app.id}
-                className="flex justify-between items-center border-b border-[#1F2937] pb-2"
+                className="flex justify-between items-center border-b border-gray-200 pb-2"
               >
                 <div>
-                  <p className="text-white font-medium">
+                  <p className="text-gray-900 font-medium">
                     {app.company_name}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-500">
                     {app.job_title}
                   </p>
                 </div>
