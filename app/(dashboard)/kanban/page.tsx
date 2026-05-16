@@ -45,11 +45,11 @@ export default function KanbanPage() {
   };
 
   return (
-    <div className="p-6 overflow-x-auto bg-[#0b0f14] rounded-xl">
-      <h1 className="text-2xl font-semibold mb-6">Kanban Board</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 overflow-x-auto">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Kanban Board</h1>
 
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="flex gap-4 min-w-max">
+        <div className="flex gap-5 min-w-max items-start">
 
           {columns.map((col) => (
             <Droppable droppableId={col} key={col}>
@@ -57,9 +57,22 @@ export default function KanbanPage() {
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  className="w-50 bg-surface-muted p-3 rounded-xl"
+                  className="w-72 bg-white border border-gray-200 rounded-2xl shadow-sm p-4"
                 >
-                  <h2 className="font-medium mb-3">{col}</h2>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="font-semibold text-gray-800 text-sm tracking-wide">
+                      {col}
+                    </h2>
+
+                    <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                      {data[col]?.length || 0}
+                    </span>
+                  </div>
+                  {data[col]?.length === 0 && (
+                    <div className="text-sm text-gray-400 text-center py-6 border border-dashed border-gray-200 rounded-xl">
+                      No applications
+                    </div>
+                  )}
 
                   {data[col]?.map((app: any, index: number) => (
                     <Draggable
@@ -72,12 +85,12 @@ export default function KanbanPage() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="bg-[#1f2937] p-3 rounded-lg mb-3 shadow-sm border border-surface-border"
+                          className="bg-white border border-gray-200 rounded-xl p-4 mb-3 shadow-sm hover:shadow-md transition cursor-grab active:cursor-grabbing"
                         >
-                          <h3 className="text-sm font-medium">
+                          <h3 className="text-sm font-semibold text-gray-900">
                             {app.company_name}
                           </h3>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-gray-500 mt-1">
                             {app.job_title}
                           </p>
                         </div>

@@ -34,8 +34,8 @@ export default function ApplicationsPage() {
 
     return (
         // <ProtectedRoute>
-        <div className="p-6 bg-[#0b0f14] min-h-screen">
-            <h1 className="text-2xl font-semibold mb-4">Applications</h1>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">Applications</h1>
 
             {/* ✅ ALWAYS SHOW FORM */}
             <ApplicationForm />
@@ -49,7 +49,7 @@ export default function ApplicationsPage() {
                 </div>
             )}
 
-            <div className="flex gap-3 mt-4">
+            <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-4 flex gap-3">
 
                 {/* 🔍 Search */}
                 <input
@@ -57,14 +57,14 @@ export default function ApplicationsPage() {
                     placeholder="Search company or role..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="border border-surface-border p-2 rounded w-full"
+                    className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-500"
                 />
 
                 {/* 🎯 Filter */}
                 <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="border border-surface-border p-2 rounded"
+                    className="rounded-xl border border-gray-300 px-4 py-3 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-500"
                 >
                     <option value="">All</option>
                     <option value="APPLIED">Applied</option>
@@ -78,11 +78,11 @@ export default function ApplicationsPage() {
             </div>
 
             {/* List */}
-            <div className="mt-6 bg-[#0b0f14] rounded-xl border border-surface-border overflow-hidden">
+            <div className="mt-6 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
 
                     {/* HEADER */}
-                    <thead className="bg-surface-muted text-left">
+                    <thead className="bg-gray-50 text-left">
                         <tr>
                             <th className="p-3">Company</th>
                             <th className="p-3">Role</th>
@@ -95,7 +95,7 @@ export default function ApplicationsPage() {
                     {/* BODY */}
                     <tbody>
                         {data?.results?.map((app: any) => (
-                            <tr key={app.id} className="border-t border-surface-border">
+                            <tr key={app.id} className="border-t border-gray-100 hover:bg-blue-50/40 transition">
 
                                 {editingId === app.id ? (
                                     <>
@@ -153,9 +153,9 @@ export default function ApplicationsPage() {
                                     </>
                                 ) : (
                                     <>
-                                        <td className="p-3 font-medium">{app.company_name}</td>
+                                        <td className="p-4 font-semibold text-gray-900">{app.company_name}</td>
 
-                                        <td className="p-3 text-gray-600">{app.job_title}</td>
+                                        <td className="p-4 text-gray-500">{app.job_title}</td>
 
                                         <td className="p-3">
                                             <StatusBadge status={app.status} />
