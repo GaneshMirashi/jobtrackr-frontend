@@ -155,11 +155,11 @@ export default function ApplicationsPage() {
                                 ) : (
                                     <>
                                         <td className="p-4 font-semibold text-gray-900"><Link
-  href={`/applications/${app.id}`}
-  className="text-blue-600 hover:underline"
->
-  {app.company_name}
-</Link></td>
+                                            href={`/applications/${app.id}`}
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            {app.company_name}
+                                        </Link></td>
 
                                         <td className="p-4 text-gray-500">{app.job_title}</td>
 
