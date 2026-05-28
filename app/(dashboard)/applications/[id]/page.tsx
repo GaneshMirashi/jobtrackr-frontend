@@ -7,6 +7,7 @@ import api from "@/lib/api";
 import StatusBadge from "@/components/applications/StatusBadge";
 import ResumeUpload from "@/components/applications/ResumeUpload";
 import NotesEditor from "@/components/applications/NotesEditor";
+import InterviewCard from "@/components/applications/InterviewCard";
 import {
     ArrowLeft,
     Building2,
@@ -222,6 +223,8 @@ export default function ApplicationDetailPage() {
                     resume={app.resume}
                 />
             </div>
+
+            <InterviewCard app={app} />
 
 
             {/* Timeline */}
