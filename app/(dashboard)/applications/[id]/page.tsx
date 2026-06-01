@@ -8,6 +8,8 @@ import StatusBadge from "@/components/applications/StatusBadge";
 import ResumeUpload from "@/components/applications/ResumeUpload";
 import NotesEditor from "@/components/applications/NotesEditor";
 import InterviewCard from "@/components/applications/InterviewCard";
+import ActivityTimeline from "@/components/applications/ActivityTimeline";
+import { useActivities } from "@/hooks/useActivities";
 import {
     ArrowLeft,
     Building2,
@@ -39,6 +41,9 @@ export default function ApplicationDetailPage() {
 
     const deleteMutation = useDeleteApplication();
     const updateMutation = useUpdateApplication();
+    const {
+        data: activities,
+    } = useActivities(params.id as string);
 
     const handleDelete = () => {
         const confirmed = confirm(
@@ -228,33 +233,9 @@ export default function ApplicationDetailPage() {
 
 
             {/* Timeline */}
-            <div className="mt-6 bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
-
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                    Application Timeline
-                </h2>
-
-                <div className="space-y-6">
-
-                    <TimelineItem
-                        title="Application Submitted"
-                        date={app.applied_date}
-                    />
-
-                    {app.follow_up_date && (
-                        <TimelineItem
-                            title="Follow Up Scheduled"
-                            date={app.follow_up_date}
-                        />
-                    )}
-
-                    <TimelineItem
-                        title={`Current Status: ${app.status}`}
-                        date={app.updated_at}
-                    />
-
-                </div>
-            </div>
+            <ActivityTimeline
+                activities={activities || []}
+            />
 
         </div>
     );
@@ -287,33 +268,3 @@ function InfoCard({
     );
 }
 
-/* ---------- TIMELINE ---------- */
-
-function TimelineItem({
-    title,
-    date,
-}: {
-    title: string;
-    date: string;
-}) {
-    return (
-        <div className="flex gap-4">
-
-            <div className="flex flex-col items-center">
-                <div className="w-3 h-3 rounded-full bg-blue-600 mt-1" />
-                <div className="w-[2px] flex-1 bg-gray-200" />
-            </div>
-
-            <div className="pb-6">
-                <h3 className="font-medium text-gray-900">
-                    {title}
-                </h3>
-
-                <p className="text-sm text-gray-500 mt-1">
-                    {date || "—"}
-                </p>
-            </div>
-
-        </div>
-    );
-}
