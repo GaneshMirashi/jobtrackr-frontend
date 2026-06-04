@@ -11,8 +11,22 @@ export const useCreateApplication = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      toast.success("Application added 🚀");
-      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      // ✅ Refresh applications list
+      queryClient.invalidateQueries({
+        queryKey: ["applications"],
+      });
+
+      // ✅ Refresh dashboard stats
+      queryClient.invalidateQueries({
+        queryKey: ["stats"],
+      });
+
+      // ✅ Refresh kanban
+      queryClient.invalidateQueries({
+        queryKey: ["kanban"],
+      });
+
+      toast.success("Application added successfully 🚀");
     },
 
     onError: () => {

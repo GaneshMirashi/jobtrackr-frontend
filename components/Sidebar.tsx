@@ -92,6 +92,7 @@ export default function Sidebar({
         onClick={() => {
           logout();
           onClose?.();
+          window.location.href = "/login";
         }}
         className="mt-auto flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition"
       >
