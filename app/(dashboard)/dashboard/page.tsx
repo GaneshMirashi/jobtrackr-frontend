@@ -1,6 +1,10 @@
 "use client";
 
 import { useStats } from "@/hooks/useStats";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import AnalyticsCharts from "@/components/dashboard/AnalyticsCharts";
+import SuccessRateCard from "@/components/dashboard/SuccessRateCard";
+import UpcomingInterviews from "@/components/dashboard/UpcomingInterviews";
 import {
   PieChart,
   Pie,
@@ -20,6 +24,7 @@ const COLORS = [
 
 export default function DashboardPage() {
   const { data, isLoading } = useStats();
+  const { data: analytics } = useAnalytics();
 
   if (isLoading)
     return <div className="p-6 text-gray-400">Loading dashboard...</div>;
@@ -125,7 +130,29 @@ export default function DashboardPage() {
         </div>
 
       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
 
+  <div className="lg:col-span-2">
+    <AnalyticsCharts
+      data={
+        analytics?.monthly_applications || []
+      }
+    />
+  </div>
+
+  <SuccessRateCard
+    rate={analytics?.success_rate || 0}
+  />
+
+</div>
+
+<div className="mt-6">
+  <UpcomingInterviews
+    interviews={
+      analytics?.upcoming_interviews || []
+    }
+  />
+</div>
     </div>
   );
 }
