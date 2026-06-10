@@ -10,6 +10,7 @@ import {
   Bell,
   FileText,
   LogOut,
+  Calendar,
 } from "lucide-react";
 
 export default function Sidebar({
@@ -46,6 +47,11 @@ export default function Sidebar({
       href: "/resume",
       icon: FileText,
     },
+    {
+      name: "Calendar",
+      href: "/calendar",
+      icon: Calendar,
+    }
   ];
 
   return (
