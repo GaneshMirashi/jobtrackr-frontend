@@ -8,6 +8,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import { useApplications } from "@/hooks/useApplications";
 import ApplicationForm from "@/components/applications/ApplicationForm";
 import StatusBadge from "@/components/applications/StatusBadge";
+import api from "@/lib/api";
 
 export default function ApplicationsPage() {
 
@@ -36,7 +37,45 @@ export default function ApplicationsPage() {
     return (
         // <ProtectedRoute>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">Applications</h1>
+            <div className="flex items-center justify-between mb-6">
+
+                <h1 className="text-3xl font-bold text-gray-900">
+                    Applications
+                </h1>
+
+                <button
+                    onClick={async () => {
+
+                        const response = await api.get(
+                            "/applications/export/csv/",
+                            {
+                                responseType: "blob",
+                            }
+                        );
+
+                        const url = window.URL.createObjectURL(
+                            new Blob([response.data])
+                        );
+
+                        const link = document.createElement("a");
+
+                        link.href = url;
+
+                        link.setAttribute(
+                            "download",
+                            "applications.csv"
+                        );
+
+                        document.body.appendChild(link);
+
+                        link.click();
+                    }}
+                    className="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl shadow-sm"
+                >
+                    Export CSV
+                </button>
+
+            </div>
 
             {/* ✅ ALWAYS SHOW FORM */}
             <ApplicationForm />
