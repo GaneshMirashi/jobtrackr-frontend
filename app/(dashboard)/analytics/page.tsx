@@ -35,7 +35,7 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
+    <div className="min-h-screen ml-64 bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
 
       <h1 className="text-3xl font-bold text-gray-900 mb-6">
         Analytics

@@ -45,7 +45,7 @@ export default function KanbanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 overflow-x-auto">
+    <div className="min-h-screen ml-64 bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 overflow-x-auto">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Kanban Board</h1>
 
       <DragDropContext onDragEnd={handleDragEnd}>

@@ -1,145 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import { useResumeAnalyzer } from "@/hooks/useResumeAnalyzer";
-
-// export default function ResumePage() {
-//   const { mutate, data, isPending, error } = useResumeAnalyzer();
-//   const [text, setText] = useState("");
-//   const [file, setFile] = useState<File | null>(null);
-//   const [jobRole, setJobRole] = useState("");
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
-//       <div className="max-w-6xl mx-auto space-y-6">
-//         <div>
-//           <h1 className="text-3xl font-bold text-gray-900">
-//             AI Resume Analyzer
-//           </h1>
-
-//           <p className="text-gray-500 mt-2">
-//             Upload your resume and get AI-powered insights
-//           </p>
-//         </div>
-
-//         <input
-//           type="text"
-//           placeholder="Enter target job role (Example: Python Backend Developer)"
-//           value={jobRole}
-//           onChange={(e) => setJobRole(e.target.value)}
-//           className="w-full rounded-2xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-//         />
-
-//         <textarea
-//           placeholder="Paste resume here..."
-//           value={text}
-//           onChange={(e) => setText(e.target.value)}
-//           className="w-full rounded-2xl border border-gray-300 px-4 py-4 h-52 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 resize-none"
-//         />
-
-//         <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center bg-gray-50">
-
-//           <input
-//             type="file"
-//             className="hidden"
-//             id="resume-upload"
-//             onChange={(e) => {
-//               const selectedFile = e.target.files?.[0];
-
-//               if (selectedFile) {
-//                 setFile(selectedFile);
-//               }
-//             }}
-//           />
-
-//           <label
-//             htmlFor="resume-upload"
-//             className="cursor-pointer"
-//           >
-//             <p className="text-sm text-gray-600">
-//               Click to upload resume
-//             </p>
-
-//             <p className="text-xs text-gray-400 mt-1">
-//               PDF, DOCX supported
-//             </p>
-//           </label>
-
-//           {file && (
-//             <p className="mt-3 text-sm text-blue-600 font-medium">
-//               {file.name}
-//             </p>
-//           )}
-//         </div>
-//         {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
-//           Something went wrong
-//         </div>}
-
-//         <button
-//           onClick={() => {
-//             if (file) {
-//               const formData = new FormData();
-//               formData.append("file", file);
-//               formData.append("job_role", jobRole);
-//               mutate(formData);
-//             } else {
-//               mutate({
-//                 text,
-//                 job_role: jobRole,
-//               });
-//             }
-//           }}
-//           className="w-full rounded-2xl bg-blue-600 py-3 text-white font-medium transition hover:bg-blue-700 disabled:opacity-70"
-//         >
-//           Analyze
-//         </button>
-
-//         {isPending && <div className="bg-white border border-gray-200 rounded-2xl p-6 text-center text-gray-500 shadow-sm">
-//           Analyzing your resume with AI...
-//         </div>}
-
-//         {data && (
-//           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-//             <Card title="Skills" items={data.skills} />
-//             <Card title="Strengths" items={data.strengths} />
-//             <Card title="Weaknesses" items={data.weaknesses} />
-//             <Card title="Suggestions" items={data.suggestions} />
-
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// function Card({ title, items }: any) {
-//   if (!items) return null;
-
-//   return (
-//     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5">
-
-//       <h2 className="text-lg font-semibold text-gray-900 mb-4">
-//         {title}
-//       </h2>
-
-//       <ul className="space-y-3">
-//         {items.map((item: string, i: number) => (
-//           <li
-//             key={i}
-//             className="text-sm text-gray-600 border-b border-gray-100 pb-2"
-//           >
-//             {item}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-
-
-
 "use client";
 
 import { useState } from "react";
@@ -152,188 +10,208 @@ export default function ResumePage() {
   const [file, setFile] = useState<File | null>(null);
   const [jobRole, setJobRole] = useState("");
 
+  const handleAnalyze = () => {
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("job_role", jobRole);
+      mutate(formData);
+    } else if (text.trim()) {
+      mutate({ text, job_role: jobRole });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-100 p-6">
-
+    <div className="min-h-screen ml-64 bg-slate-50 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
-
         {/* HEADER */}
-        <div className="bg-white rounded-3xl shadow-lg border border-gray-200 p-8 mb-6">
-
-          <h1 className="text-4xl font-bold text-black">
-            AI Resume Analyzer
-          </h1>
-
-          <p className="text-black mt-3 text-lg">
-            Upload your resume and compare it with your target job role using AI
+        <div className="mb-10">
+          <h1 className="text-4xl font-semibold text-gray-900">Resume Analyzer</h1>
+          <p className="text-gray-600 mt-2 text-lg">
+            AI-powered ATS analysis and job role matching
           </p>
-
         </div>
 
-        {/* MAIN FORM */}
-        <div className="bg-white rounded-3xl shadow-lg border border-gray-200 p-8 space-y-6">
+        {/* INPUT CARD */}
+        <div className="bg-white rounded-2xl shadow border border-gray-200 p-8 mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Job Role */}
+            <div className="lg:col-span-5">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                TARGET JOB ROLE
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Python Backend Developer"
+                value={jobRole}
+                onChange={(e) => setJobRole(e.target.value)}
+                className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:border-blue-600 focus:ring-1 focus:ring-blue-200 outline-none text-base"
+              />
+            </div>
 
-          {/* JOB ROLE */}
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">
-              Target Job Role
-            </label>
-
-            <input
-              type="text"
-              placeholder="Example: Python Backend Developer"
-              value={jobRole}
-              onChange={(e) => setJobRole(e.target.value)}
-              className="w-full rounded-2xl border border-gray-300 px-4 py-4 text-black placeholder:text-gray-500 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-            />
+            {/* Resume Text */}
+            <div className="lg:col-span-7">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                RESUME TEXT
+              </label>
+              <textarea
+                placeholder="Paste your resume content here..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="w-full h-52 px-5 py-4 border border-gray-300 rounded-xl focus:border-blue-600 focus:ring-1 focus:ring-blue-200 outline-none resize-y text-base"
+              />
+            </div>
           </div>
 
-          {/* RESUME TEXT */}
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">
-              Resume Content
-            </label>
-
-            <textarea
-              placeholder="Paste your resume here..."
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="w-full rounded-2xl border border-gray-300 px-4 py-4 h-56 text-black placeholder:text-gray-500 outline-none resize-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-            />
-          </div>
-
-          {/* FILE UPLOAD */}
-          <div className="border-2 border-dashed border-gray-300 rounded-3xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition">
-
+          {/* File Upload */}
+          <div className="mt-8 border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-gray-400 transition">
             <input
               type="file"
-              className="hidden"
               id="resume-upload"
-              onChange={(e) => {
-                const selectedFile = e.target.files?.[0];
-
-                if (selectedFile) {
-                  setFile(selectedFile);
-                }
-              }}
+              className="hidden"
+              accept=".pdf,.docx"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
             />
-
-            <label
-              htmlFor="resume-upload"
-              className="cursor-pointer"
-            >
-
-              <div className="text-5xl mb-4">
-                📄
-              </div>
-
-              <p className="text-lg font-semibold text-black">
-                Click to Upload Resume
-              </p>
-
-              <p className="text-sm text-black mt-2">
-                PDF and DOCX supported
-              </p>
-
+            <label htmlFor="resume-upload" className="cursor-pointer">
+              <div className="text-4xl mb-3">📄</div>
+              <p className="font-medium text-gray-800">Upload Resume (PDF or DOCX)</p>
+              <p className="text-sm text-gray-500 mt-1">Click to browse files</p>
             </label>
 
             {file && (
-              <div className="mt-5 inline-block bg-blue-100 text-black px-4 py-2 rounded-xl text-sm font-medium">
-                {file.name}
-              </div>
+              <p className="mt-4 text-sm text-blue-600 font-medium">Selected: {file.name}</p>
             )}
-
           </div>
 
-          {/* ERROR */}
-          {error && (
-            <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-4 text-red-700 font-medium">
-              Something went wrong while analyzing the resume.
-            </div>
-          )}
-
-          {/* BUTTON */}
           <button
-            onClick={() => {
-              if (file) {
-                const formData = new FormData();
-
-                formData.append("file", file);
-                formData.append("job_role", jobRole);
-
-                mutate(formData);
-
-              } else {
-                mutate({
-                  text,
-                  job_role: jobRole,
-                });
-              }
-            }}
-            className="w-full rounded-2xl bg-black py-4 text-white text-lg font-semibold transition hover:opacity-90"
+            onClick={handleAnalyze}
+            disabled={isPending || (!file && !text.trim()) || !jobRole.trim()}
+            className="mt-8 w-full bg-gray-900 hover:bg-black disabled:bg-gray-400 text-white font-medium py-4 rounded-xl text-lg transition"
           >
-            Analyze Resume
+            {isPending ? "Analyzing Resume..." : "Analyze Resume"}
           </button>
-
         </div>
+
+        {/* ERROR */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 p-5 rounded-2xl mb-8">
+            {error.message || "Failed to analyze resume. Please try again."}
+          </div>
+        )}
 
         {/* LOADING */}
         {isPending && (
-          <div className="mt-6 bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-lg">
+          <div className="bg-white rounded-2xl shadow p-12 text-center">
+            <div className="animate-spin w-12 h-12 border-4 border-gray-300 border-t-gray-900 rounded-full mx-auto"></div>
+            <p className="mt-6 text-gray-600 font-medium">Analyzing with AI...</p>
+          </div>
+        )}
 
-            <div className="animate-pulse space-y-3">
+        {/* RESULTS */}
+        {data && (
+          <div className="space-y-10">
+            {/* ATS SCORE */}
+            <div className="bg-white rounded-2xl shadow border border-gray-200 p-8 md:p-12">
+              <div className="flex flex-col md:flex-row items-center gap-10">
+                {/* Circular Progress */}
+                <div className="relative w-52 h-52 flex-shrink-0">
+                  <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="88" fill="none" stroke="#e5e7eb" strokeWidth="18" />
+                    <circle
+                      cx="100"
+                      cy="100"
+                      r="88"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="18"
+                      strokeDasharray={`${(data.ats_score || 0) * 5.52} 552`}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-6xl font-semibold text-gray-900">
+                      {data.ats_score || 0}
+                    </span>
+                    <span className="text-sm text-gray-500 font-medium">/ 100</span>
+                  </div>
+                </div>
 
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/3 mx-auto"></div>
-
+                <div className="flex-1">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-3xl font-semibold text-gray-900">ATS Score</h2>
+                    <span className="px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">
+                      {(data.match_percentage || data.keyword_match || 0)}% Match
+                    </span>
+                  </div>
+                  <p className="mt-4 text-gray-600 leading-relaxed text-[15.5px]">
+                    {data.summary || "Your resume is well-aligned with the target role."}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <p className="mt-5 text-black font-medium">
-              Analyzing your resume with AI...
-            </p>
+            {/* SKILLS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <SkillCard
+                title="Matched Skills"
+                items={data.skills || data.matched_skills || []}
+                color="emerald"
+              />
+              <SkillCard
+                title="Missing Skills"
+                items={data.missing_skills || []}
+                color="rose"
+              />
+            </div>
 
+            {/* INSIGHTS GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <InsightCard title="Strengths" items={data.strengths} />
+              <InsightCard title="Weaknesses" items={data.weaknesses} />
+              <InsightCard title="Suggestions" items={data.suggestions} />
+            </div>
           </div>
         )}
-
-        {/* RESULT */}
-        {data && (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
-
-            <Card title="Skills" items={data.skills} />
-            <Card title="Strengths" items={data.strengths} />
-            <Card title="Weaknesses" items={data.weaknesses} />
-            <Card title="Suggestions" items={data.suggestions} />
-
-          </div>
-        )}
-
       </div>
     </div>
   );
 }
 
-function Card({ title, items }: any) {
+function SkillCard({ title, items, color }: any) {
+  if (!items?.length) return null;
 
-  if (!items) return null;
+  const bgColor = color === "emerald" ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-700";
 
   return (
-    <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-6">
-
-      <h2 className="text-xl font-bold text-black mb-5">
-        {title}
-      </h2>
-
-      <ul className="space-y-3">
-
+    <div className="bg-white rounded-2xl shadow border border-gray-200 p-8">
+      <h3 className="font-semibold text-xl text-gray-900 mb-6">{title}</h3>
+      <div className="flex flex-wrap gap-3">
         {items.map((item: string, i: number) => (
-          <li
+          <span
             key={i}
-            className="text-sm text-black border-b border-gray-200 pb-3 leading-6"
+            className={`${bgColor} px-5 py-2 rounded-2xl text-sm font-medium`}
           >
-            • {item}
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function InsightCard({ title, items }: any) {
+  if (!items?.length) return null;
+
+  return (
+    <div className="bg-white rounded-2xl shadow border border-gray-200 p-8">
+      <h3 className="font-semibold text-xl text-gray-900 mb-6">{title}</h3>
+      <ul className="space-y-4">
+        {items.map((item: string, i: number) => (
+          <li key={i} className="text-gray-700 text-[15px] leading-relaxed flex gap-3">
+            <span className="text-emerald-500 mt-0.5">•</span>
+            {item}
           </li>
         ))}
-
       </ul>
     </div>
   );

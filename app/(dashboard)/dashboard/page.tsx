@@ -37,7 +37,7 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 space-y-6">
+    <div className="min-h-screen ml-64 bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6 space-y-6">
 
       {/* 🔹 Header */}
       <div className="flex items-center justify-between">

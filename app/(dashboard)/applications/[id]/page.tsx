@@ -95,7 +95,7 @@ export default function ApplicationDetailPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
+        <div className="min-h-screen ml-64 bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-6">
 
             {/* Back Button */}
             <button
