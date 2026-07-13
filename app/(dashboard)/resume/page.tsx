@@ -23,7 +23,7 @@ export default function ResumePage() {
 
   return (
     <div className="min-h-screen ml-64 bg-slate-50 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
+      <div className=" mx-auto">
         {/* HEADER */}
         <div className="mb-10">
           <h1 className="text-4xl font-semibold text-gray-900">Resume Analyzer</h1>
