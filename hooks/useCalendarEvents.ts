@@ -4,10 +4,13 @@ import api from "@/lib/api";
 export const useCalendarEvents = () => {
   return useQuery({
     queryKey: ["calendar-events"],
-
     queryFn: async () => {
-      const res = await api.get("/calendar-events/");
-      return res.data;
+      const response = await api.get(
+        "/applications/calendar/events/"
+      );
+
+      return response.data;
     },
+    staleTime: 1000 * 60 * 5,
   });
 };
