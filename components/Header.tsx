@@ -2,6 +2,7 @@
 
 import { Menu, Bell, Search, X } from "lucide-react";
 import { useState } from "react";
+import { useProfile } from "@/hooks/useProfile";
 
 export default function Header({
   onMenuClick,
@@ -12,6 +13,8 @@ export default function Header({
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const { data: profile } = useProfile();
+  
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -95,15 +98,15 @@ export default function Header({
         {/* Profile */}
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold text-lg">
-            G
+            {profile?.name?.charAt(0).toUpperCase() || "U"}
           </div>
 
           <div className="hidden md:block">
             <p className="text-sm font-medium text-gray-900">
-              Ganesh
+              {profile?.name || "Loading..."}
             </p>
             <p className="text-xs text-gray-500">
-              Python Developer
+              {profile?.email}
             </p>
           </div>
         </div>
